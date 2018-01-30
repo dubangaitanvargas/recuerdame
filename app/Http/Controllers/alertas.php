@@ -22,24 +22,9 @@ class alertas extends Controller
     {
         $data = request()->all();
         $bulkSms = new BulkSms('username', 'password', 'baseurl');
-        return('Exito, Este mensaje Fue Enviado');
-        $bulkSms::sendMessage('57'.$data["phone"], 'Señor(a) '. $data['namecli'] . ' Este es un mensaje de prueba');
-        //$telefono='+5731088869409';
-        /*Twilio::message($telefono , ' Elefantes Rosados ​​y Arco Iris Feliz ');*/
-        /*$sid='ACc512ca80a77a939ba77b3c493f998555';
-        $token='12804650627a50c828080d0530efad87';
-        $from='+56945950224';
-        $twilio = new Twilio($sid, $token, $from);
-        $twilio::from('twilio')->message('12345', 'Go go go!');
-        /*$twilio->message( $telefono , ' Elefantes Rosados ​​y Arco Iris Feliz ' );*/
-        /*$mensaje = $client->acount->messages->create(array(
-                "From"=>$from,
-                "To"=>$telefono,
-                "Body"=>"Holaa otro Ejemplo"
-
-        ));
-        /*$sdk = Twilio::getTwilio();*/
-
+        $messageBody = 'ServisGirardot le recuerda Sr(a) '. $data['namecli'] . ' que su ' . $data["product"] . ' vence en 10 Dias. Comuniquese Al 3200000001 para mayor informacion.';
+        return($messageBody);
+        $bulkSms::sendMessage('57'.$data["phone"], $messageBody );
     	return('Exito, Este mensaje Fue Enviado');
     }
 }

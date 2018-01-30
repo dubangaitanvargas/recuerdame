@@ -34,36 +34,85 @@
 	<div>
 		Generar Alertas
 	</div>
+	<div class="col-md-12 col-offset-2" style="margin-top: 40px;">
+		<div class="row">
 
-	<div class="col-md-10 col-offset-2" style="margin-top: 100px;">
-		<div class="form-group">
-			<div class="col-lg-4">
-				<label for="client">Nombre de Cliente:</label>
-				<div class="input-group">
-					<input type="text" class="form-control" aria-describedby="basic-addon1" id="namecli">
-					<span class="input-group-btn">
-						<!--button class="btn btn-info" type="button">+</button-->
-						<!-- Button trigger modal -->
-					    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
-					    	@section('Tilemodal')
-					    	@endsection
-					      +
-					    </button>
-					    <!-- /button trigger modal -->
-					</span>
+				<div class="col-md-4">
+					<div class="col-md-3" style="padding: 0px;" >
+						<label style="font-size: 18px;"> Producto </label>
+					</div>
+					<form>	
+					<div class="col-md-6" id="radioButton">
+						<input type="radio" name="producto" value="SOAT ">SOAT <br>	
+						<input type="radio" name="producto" value="TecnicoMecanica ">TecnicoMecanica <br>	
+						<input type="radio" name="producto" value="Licencia ">Licencia <br>	
+					</div>
+					</form>
+				</div>
+				<div class="col-md-4">
+					<div class="col-md-10">
+						<label>Fecha Compra:</label>
+					<div class='input-group date' data-provide="datepicker" id='datepicker'>
+                    	<input type='text' class="form-control" />
+                    	<span class="input-group-addon">
+                        	<span class="glyphicon glyphicon-calendar"></span>
+                    	</span>
+                	</div>
+                	</div>
+                	<br>
+                	<br>
+                	<div class="col-md-10">
+						<label>Fecha Vencimiento:</label>				
+					<div class='input-group date' data-provide="datepicker" id='datepicker'>
+                    	<input type='text' class="form-control" />
+                    	<span class="input-group-addon">
+                        	<span class="glyphicon glyphicon-calendar"></span>
+                    	</span>
+                	</div>
+                	</div>
+				</div>
+		</div>
+		<br>
+		<br>
+
+		<div class="row" >
+			<label style="font-size: 18px;">Cliente</label>
+			<div class="form-group" style="margin-left: 20px" style="border: 2px solid black; border-radius: 10px;">
+				<div class="row">
+					<div class="col-lg-8 col-md-8 col-xm-8">
+						<div class="input-group">
+							<label class="input-group-addon" for="namecli">Nombres:</label>
+							<input type="text" class="form-control" aria-describedby="basic-addon1" id="namecli">
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-8 col-md-8 col-xm-8">
+						<div class="input-group">
+							<label class="input-group-addon" for="number">Numero Celular:</label>
+							<input type="text" class="form-control" aria-describedby="basic-addon1" id="number">
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-8 col-md-8 col-xm-8">
+						<div class="input-group">
+							<label class="input-group-addon" for="email">Email:</label>
+							<input type="text" class="form-control" aria-describedby="basic-addon1" id="email">
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="col-lg-4">
-				<label for="number">Numero Cliente:</label>
-					<div class="input-group">
-					<input type="text" class="form-control" aria-describedby="basic-addon1" id="number">
-					<span class="input-group-btn">
-						<button class="btn btn-secondary" onclick="sendSms($('#number').val(), $('#namecli').val());">Enviar SMS</button>
-					</span>
-				</div>
-			</div>			
 		</div>
+
+		<button class="btn btn-secondary" onclick="sendSms($('#number').val(), $('#namecli').val());" >Enviar SMS</button>
+		<button class="btn btn-primary" onclick="inhabilitado();" >Guardar</button>
+		<button class="btn btn-danger" onclick="inhabilitado();" >Salir</button>
 	</div>
+
+
 
 
 @endsection
@@ -80,13 +129,22 @@
 	        }
 	    });
 
+		$('.datepicker').datepicker({
+		});
+
+		function inhabilitado(){
+			 alert('Esta es una version de prueba, por el momento esta funcion esta inhabilitada');
+		}
 
 		function sendSms(phone, namecli){
 			
+			var prod = $('input:radio[name=producto]:checked').val();
 			var parameters = {
 				'phone'	: phone,
-				'namecli' : namecli
+				'namecli' : namecli,
+				'product' : prod
 			};
+
 		    $.ajax({
 			    // aqui va la ubicación de la página PHP
 		      	type: 'POST',

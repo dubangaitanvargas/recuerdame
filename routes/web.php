@@ -13,11 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', 'pagesController@home');
+//Route::get('/', 'pagesController@home');
 
-Route::get('/dashboard','Dashboard@dashboard');
+//Route::get('/dashboard','Dashboard@dashboard');
 
 Route::get('/login', 'pagesController@login');
+
+Route::get('/', 'alertas@alertas');
 
 Route::get('/alertas', 'alertas@alertas');
 
